@@ -27,6 +27,13 @@ const photos = [
     '/Photo/DSC09447.jpg.jpeg',
     '/Photo/DSC09485.jpg.jpeg',
     '/Photo/WhatsApp Image 2026-02-27 at 15.11.31.jpeg',
+    '/new photos/DSC06314-Modifier.jpg',
+    '/new photos/DSC06395-Modifier.jpg',
+    '/new photos/DSC06552-Modifier.jpg',
+    '/new photos/DSC06626-Modifier.jpg',
+    '/new photos/DSC06725-Modifier.jpg',
+    '/new photos/DSC_1280-Edit.jpg',
+    '/new photos/ghaziphotoghraphiesalé.jpg',
 ];
 
 export default function Photography() {
