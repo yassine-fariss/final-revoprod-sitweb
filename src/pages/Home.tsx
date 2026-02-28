@@ -113,8 +113,9 @@ export default function Home() {
                     </AnimatedSection>
 
                     <AnimatedSection delay={0.4}>
-                        <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto mb-12 drop-shadow-lg">
-                            À Casablanca.
+                        <p className="text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto mb-12 drop-shadow-lg leading-relaxed">
+                            Votre agence de production audiovisuelle et création digitale à Casablanca. <br className="hidden md:block" />
+                            Nous transformons vos idées en expériences visuelles percutantes et innovantes.
                         </p>
                     </AnimatedSection>
 
