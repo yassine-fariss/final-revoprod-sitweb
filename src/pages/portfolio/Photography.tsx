@@ -36,6 +36,44 @@ const photos = [
     '/new photos/ghaziphotoghraphiesalé.jpg',
 ];
 
+function PhotoCard({ photo, index, onClick }: { photo: string, index: number, onClick: () => void }) {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    return (
+        <AnimatedSection delay={index * 0.05}>
+            <div
+                className={`group relative cursor-pointer overflow-hidden border border-white/5 hover:border-brand-gold/50 transition-colors break-inside-avoid bg-white/5 mb-4 ${!isLoaded ? 'animate-pulse min-h-[300px]' : ''
+                    }`}
+                onClick={onClick}
+            >
+                {/* Loader Spinner (Subtle) */}
+                {!isLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-8 h-8 border-2 border-brand-gold/20 border-t-brand-gold rounded-full animate-spin" />
+                    </div>
+                )}
+
+                <img
+                    src={photo}
+                    alt={`Portfolio ${index + 1}`}
+                    onLoad={() => setIsLoaded(true)}
+                    className={`w-full h-auto object-cover transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                        } group-hover:scale-110`}
+                    loading="lazy"
+                />
+
+                {/* Overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-300 ${isLoaded ? '' : 'hidden'}`} />
+                <div className={`absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isLoaded ? '' : 'hidden'}`}>
+                    <div className="w-14 h-14 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center bg-black/50 backdrop-blur-sm transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                        <Maximize2 className="w-6 h-6" />
+                    </div>
+                </div>
+            </div>
+        </AnimatedSection>
+    );
+}
+
 export default function Photography() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -67,30 +105,15 @@ export default function Photography() {
                 </AnimatedSection>
             </section>
 
-            {/* Masonry Grid */}
             <section className="container mx-auto px-6">
-                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
                     {photos.map((photo, index) => (
-                        <AnimatedSection key={index} delay={index * 0.05}>
-                            <div
-                                className="group relative cursor-pointer overflow-hidden border border-white/5 hover:border-brand-gold/50 transition-colors break-inside-avoid"
-                                onClick={() => openLightbox(index)}
-                            >
-                                <img
-                                    src={photo}
-                                    alt={`Portfolio ${index + 1}`}
-                                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                                    loading="lazy"
-                                />
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-300" />
-                                <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div className="w-14 h-14 rounded-full border border-brand-gold text-brand-gold flex items-center justify-center bg-black/50 backdrop-blur-sm transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                                        <Maximize2 className="w-6 h-6" />
-                                    </div>
-                                </div>
-                            </div>
-                        </AnimatedSection>
+                        <PhotoCard
+                            key={index}
+                            photo={photo}
+                            index={index}
+                            onClick={() => openLightbox(index)}
+                        />
                     ))}
                 </div>
             </section>
