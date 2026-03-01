@@ -132,30 +132,49 @@ export default function Photography() {
                 </AnimatedSection>
             </section>
 
-            {/* Collection Tabs */}
-            <section className="container mx-auto px-6 mb-12">
-                <AnimatedSection delay={0.1}>
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 p-1 bg-white/5 border border-white/10 rounded-xl w-fit mx-auto md:mx-0">
-                        <button
+            {/* Collection Selection Cards */}
+            <section className="container mx-auto px-6 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Wedding Collection Card */}
+                    <AnimatedSection delay={0.1}>
+                        <div
                             onClick={() => { setActiveTab('wedding'); setSelectedIndex(null); }}
-                            className={`px-8 py-3 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'wedding'
-                                ? 'bg-brand-gold text-black shadow-[0_0_20px_rgba(198,167,94,0.3)]'
-                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                            className={`group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 transition-all duration-500 rounded-xl ${activeTab === 'wedding' ? 'border-brand-gold shadow-[0_0_30px_rgba(198,167,94,0.2)]' : 'border-white/10 grayscale hover:grayscale-0'
                                 }`}
                         >
-                            Wedding Collection
-                        </button>
-                        <button
+                            <img
+                                src={weddingPhotos[0]}
+                                alt="Wedding Collection Preview"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className={`absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 ${activeTab === 'wedding' ? 'bg-black/20' : ''}`} />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">Wedding Collection</h2>
+                                <div className={`w-12 h-1 bg-brand-gold transition-all duration-500 ${activeTab === 'wedding' ? 'w-24' : 'group-hover:w-24 opacity-0 group-hover:opacity-100'}`} />
+                            </div>
+                        </div>
+                    </AnimatedSection>
+
+                    {/* Commercial Collection Card */}
+                    <AnimatedSection delay={0.2}>
+                        <div
                             onClick={() => { setActiveTab('commercial'); setSelectedIndex(null); }}
-                            className={`px-8 py-3 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'commercial'
-                                ? 'bg-brand-gold text-black shadow-[0_0_20px_rgba(198,167,94,0.3)]'
-                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                            className={`group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 transition-all duration-500 rounded-xl ${activeTab === 'commercial' ? 'border-brand-gold shadow-[0_0_30px_rgba(198,167,94,0.2)]' : 'border-white/10 grayscale hover:grayscale-0'
                                 }`}
                         >
-                            Commercial Collection
-                        </button>
-                    </div>
-                </AnimatedSection>
+                            <img
+                                src={commercialPhotos[0]}
+                                alt="Commercial Collection Preview"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className={`absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 ${activeTab === 'commercial' ? 'bg-black/20' : ''}`} />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">Commercial Collection</h2>
+                                <div className={`w-12 h-1 bg-brand-gold transition-all duration-500 ${activeTab === 'commercial' ? 'w-24' : 'group-hover:w-24 opacity-0 group-hover:opacity-100'}`} />
+                            </div>
+                        </div>
+                    </AnimatedSection>
+                </div>
             </section>
 
             {/* Masonry Grid */}
