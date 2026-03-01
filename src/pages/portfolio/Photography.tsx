@@ -2,8 +2,7 @@ import { useState } from 'react';
 import AnimatedSection from '../../components/AnimatedSection';
 import { Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const photos = [
-    // Weddings
+const weddingPhotos = [
     '/Photo/weddings/DSC01111-1.jpg.jpeg',
     '/Photo/weddings/DSC01117-1.jpg (1).jpeg',
     '/Photo/weddings/DSC01117-1.jpg.jpeg',
@@ -13,6 +12,21 @@ const photos = [
     '/Photo/weddings/DSC01291-1.jpg (1).jpeg',
     '/Photo/weddings/DSC01291-1.jpg.jpeg',
     '/Photo/weddings/DSC01292-1.jpg.jpeg',
+    '/Photo/weddings/DSC06294.jpg',
+    '/Photo/weddings/DSC06296.jpg',
+    '/Photo/weddings/DSC06298.jpg',
+    '/Photo/weddings/DSC06299.jpg',
+    '/Photo/weddings/DSC06302.jpg',
+    '/Photo/weddings/DSC06307.jpg',
+    '/Photo/weddings/DSC06311.jpg',
+    '/Photo/weddings/DSC06320.jpg',
+    '/Photo/weddings/DSC06321.jpg',
+    '/Photo/weddings/DSC06326.jpg',
+    '/Photo/weddings/DSC06328.jpg',
+    '/Photo/weddings/DSC06330.jpg',
+    '/Photo/weddings/DSC06341.jpg',
+    '/Photo/weddings/DSC06389.jpg',
+    '/Photo/weddings/DSC06397.jpg',
     '/Photo/weddings/DSC09108copy.jpg.jpeg',
     '/Photo/weddings/DSC09116copy.jpg.jpeg',
     '/Photo/weddings/DSC09124copy.jpg.jpeg',
@@ -28,16 +42,15 @@ const photos = [
     '/Photo/weddings/DSC09447.jpg.jpeg',
     '/Photo/weddings/DSC09485.jpg.jpeg',
     '/Photo/weddings/WhatsApp Image 2026-02-27 at 15.11.31.jpeg',
+];
 
-    // Commercial Photos
+const commercialPhotos = [
     '/Photo/commercial photos/finale.jpg.jpeg',
     '/Photo/commercial photos/GH801057-Panorama.JPG.jpeg',
     '/Photo/commercial photos/GH801095-Panorama.JPG.jpeg',
     '/Photo/commercial photos/GH801109-Panorama.JPG.jpeg',
     '/Photo/commercial photos/GH801123.JPG.jpeg',
     '/Photo/commercial photos/ghaziphotoghraphie06.jpg.jpeg',
-
-    // New Photos
     '/new photos/DSC06314-Modifier.jpg',
     '/new photos/DSC06395-Modifier.jpg',
     '/new photos/DSC06552-Modifier.jpg',
@@ -87,40 +100,70 @@ function PhotoCard({ photo, index, onClick }: { photo: string, index: number, on
 
 export default function Photography() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial'>('wedding');
+
+    const currentPhotos = activeTab === 'wedding' ? weddingPhotos : commercialPhotos;
 
     const openLightbox = (index: number) => setSelectedIndex(index);
     const closeLightbox = () => setSelectedIndex(null);
 
     const goPrev = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setSelectedIndex((prev) => (prev !== null ? (prev - 1 + photos.length) % photos.length : null));
+        setSelectedIndex((prev) => (prev !== null ? (prev - 1 + currentPhotos.length) % currentPhotos.length : null));
     };
 
     const goNext = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setSelectedIndex((prev) => (prev !== null ? (prev + 1) % photos.length : null));
+        setSelectedIndex((prev) => (prev !== null ? (prev + 1) % currentPhotos.length : null));
     };
 
     return (
         <div className="min-h-screen bg-black pt-12 pb-24">
             {/* Header */}
-            <section className="container mx-auto px-6 mb-16 pt-12 md:pt-24">
+            <section className="container mx-auto px-6 mb-12 pt-12 md:pt-24">
                 <AnimatedSection>
-                    <div className="max-w-3xl">
+                    <div className="max-w-3xl text-center md:text-left mx-auto md:mx-0">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Photographie</h1>
-                        <div className="w-24 h-1 bg-brand-gold mb-6" />
+                        <div className="w-24 h-1 bg-brand-gold mb-6 mx-auto md:mx-0" />
                         <p className="text-xl text-white/60 leading-relaxed">
-                            Immortalisons vos moments. Portraits professionnels, architecture, et photographie de produits.
+                            Immortalisons vos moments. Découvrez nos collections exclusives.
                         </p>
                     </div>
                 </AnimatedSection>
             </section>
 
+            {/* Collection Tabs */}
+            <section className="container mx-auto px-6 mb-12">
+                <AnimatedSection delay={0.1}>
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 p-1 bg-white/5 border border-white/10 rounded-xl w-fit mx-auto md:mx-0">
+                        <button
+                            onClick={() => { setActiveTab('wedding'); setSelectedIndex(null); }}
+                            className={`px-8 py-3 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'wedding'
+                                ? 'bg-brand-gold text-black shadow-[0_0_20px_rgba(198,167,94,0.3)]'
+                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                                }`}
+                        >
+                            Wedding Collection
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('commercial'); setSelectedIndex(null); }}
+                            className={`px-8 py-3 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeTab === 'commercial'
+                                ? 'bg-brand-gold text-black shadow-[0_0_20px_rgba(198,167,94,0.3)]'
+                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                                }`}
+                        >
+                            Commercial Collection
+                        </button>
+                    </div>
+                </AnimatedSection>
+            </section>
+
+            {/* Masonry Grid */}
             <section className="container mx-auto px-6">
                 <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
-                    {photos.map((photo, index) => (
+                    {currentPhotos.map((photo, index) => (
                         <PhotoCard
-                            key={index}
+                            key={`${activeTab}-${index}`}
                             photo={photo}
                             index={index}
                             onClick={() => openLightbox(index)}
@@ -153,7 +196,7 @@ export default function Photography() {
 
                     {/* Image */}
                     <img
-                        src={photos[selectedIndex]}
+                        src={currentPhotos[selectedIndex]}
                         alt={`Aperçu HD ${selectedIndex + 1}`}
                         className="max-w-full max-h-full object-contain shadow-2xl border border-white/10"
                         onClick={(e) => e.stopPropagation()}
@@ -169,7 +212,7 @@ export default function Photography() {
 
                     {/* Counter */}
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-sm font-mono">
-                        {selectedIndex + 1} / {photos.length}
+                        {selectedIndex + 1} / {currentPhotos.length}
                     </div>
                 </div>
             )}
