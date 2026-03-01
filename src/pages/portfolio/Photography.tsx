@@ -93,9 +93,9 @@ function PhotoCard({ photo, index, onClick }: { photo: string, index: number, on
 
 export default function Photography() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial'>('wedding');
+    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial' | null>(null);
 
-    const currentPhotos = activeTab === 'wedding' ? weddingPhotos : commercialPhotos;
+    const currentPhotos = activeTab === 'wedding' ? weddingPhotos : (activeTab === 'commercial' ? commercialPhotos : []);
 
     const openLightbox = (index: number) => setSelectedIndex(index);
     const closeLightbox = () => setSelectedIndex(null);
@@ -116,73 +116,95 @@ export default function Photography() {
             <section className="container mx-auto px-6 mb-12 pt-12 md:pt-24">
                 <AnimatedSection>
                     <div className="max-w-3xl text-center md:text-left mx-auto md:mx-0">
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Photographie</h1>
+                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+                            {activeTab ? (activeTab === 'wedding' ? 'Wedding Collection' : 'Commercial Collection') : 'Photographie'}
+                        </h1>
                         <div className="w-24 h-1 bg-brand-gold mb-6 mx-auto md:mx-0" />
                         <p className="text-xl text-white/60 leading-relaxed">
-                            Immortalisons vos moments. Découvrez nos collections exclusives.
+                            {activeTab
+                                ? "Immortalisons vos moments. Découvrez l'intégralité de cette collection exclusive."
+                                : "Immortalisons vos moments. Choisissez une collection pour découvrir nos réalisations."
+                            }
                         </p>
                     </div>
                 </AnimatedSection>
             </section>
 
-            {/* Collection Selection Cards */}
-            <section className="container mx-auto px-6 mb-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Wedding Collection Card */}
+            {/* Back Button (Only when a collection is active) */}
+            {activeTab && (
+                <section className="container mx-auto px-6 mb-12">
                     <AnimatedSection delay={0.1}>
-                        <div
-                            onClick={() => { setActiveTab('wedding'); setSelectedIndex(null); }}
-                            className={`group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 transition-all duration-500 rounded-xl ${activeTab === 'wedding' ? 'border-brand-gold shadow-[0_0_30px_rgba(198,167,94,0.2)]' : 'border-white/10 grayscale hover:grayscale-0'
-                                }`}
+                        <button
+                            onClick={() => setActiveTab(null)}
+                            className="inline-flex items-center space-x-2 text-brand-gold hover:text-white transition-colors group"
                         >
-                            <img
-                                src={weddingPhotos[0]}
-                                alt="Wedding Collection Preview"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className={`absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 ${activeTab === 'wedding' ? 'bg-black/20' : ''}`} />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">Wedding Collection</h2>
-                                <div className={`w-12 h-1 bg-brand-gold transition-all duration-500 ${activeTab === 'wedding' ? 'w-24' : 'group-hover:w-24 opacity-0 group-hover:opacity-100'}`} />
-                            </div>
-                        </div>
+                            <ChevronLeft className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" />
+                            <span className="font-bold uppercase tracking-widest text-sm">Retour aux Collections</span>
+                        </button>
                     </AnimatedSection>
+                </section>
+            )}
 
-                    {/* Commercial Collection Card */}
-                    <AnimatedSection delay={0.2}>
-                        <div
-                            onClick={() => { setActiveTab('commercial'); setSelectedIndex(null); }}
-                            className={`group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 transition-all duration-500 rounded-xl ${activeTab === 'commercial' ? 'border-brand-gold shadow-[0_0_30px_rgba(198,167,94,0.2)]' : 'border-white/10 grayscale hover:grayscale-0'
-                                }`}
-                        >
-                            <img
-                                src={commercialPhotos[0]}
-                                alt="Commercial Collection Preview"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className={`absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500 ${activeTab === 'commercial' ? 'bg-black/20' : ''}`} />
-                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">Commercial Collection</h2>
-                                <div className={`w-12 h-1 bg-brand-gold transition-all duration-500 ${activeTab === 'commercial' ? 'w-24' : 'group-hover:w-24 opacity-0 group-hover:opacity-100'}`} />
+            {/* Collection Selection Cards (Only when no collection is active) */}
+            {!activeTab && (
+                <section className="container mx-auto px-6 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Wedding Collection Card */}
+                        <AnimatedSection delay={0.1}>
+                            <div
+                                onClick={() => { setActiveTab('wedding'); setSelectedIndex(null); }}
+                                className="group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 border-white/10 hover:border-brand-gold transition-all duration-500 rounded-xl shadow-2xl"
+                            >
+                                <img
+                                    src={weddingPhotos[0]}
+                                    alt="Wedding Collection Preview"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-500" />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">Wedding Collection</h2>
+                                    <div className="w-12 h-1 bg-brand-gold transition-all duration-500 group-hover:w-24 opacity-0 group-hover:opacity-100" />
+                                </div>
                             </div>
-                        </div>
-                    </AnimatedSection>
-                </div>
-            </section>
+                        </AnimatedSection>
 
-            {/* Masonry Grid */}
-            <section className="container mx-auto px-6">
-                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
-                    {currentPhotos.map((photo, index) => (
-                        <PhotoCard
-                            key={`${activeTab}-${index}`}
-                            photo={photo}
-                            index={index}
-                            onClick={() => openLightbox(index)}
-                        />
-                    ))}
-                </div>
-            </section>
+                        {/* Commercial Collection Card */}
+                        <AnimatedSection delay={0.2}>
+                            <div
+                                onClick={() => { setActiveTab('commercial'); setSelectedIndex(null); }}
+                                className="group relative aspect-[16/9] md:aspect-[21/9] cursor-pointer overflow-hidden border-2 border-white/10 hover:border-brand-gold transition-all duration-500 rounded-xl shadow-2xl"
+                            >
+                                <img
+                                    src={commercialPhotos[0]}
+                                    alt="Commercial Collection Preview"
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-500" />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">Commercial Collection</h2>
+                                    <div className="w-12 h-1 bg-brand-gold transition-all duration-500 group-hover:w-24 opacity-0 group-hover:opacity-100" />
+                                </div>
+                            </div>
+                        </AnimatedSection>
+                    </div>
+                </section>
+            )}
+
+            {/* Masonry Grid (Only when a collection is active) */}
+            {activeTab && (
+                <section className="container mx-auto px-6">
+                    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
+                        {currentPhotos.map((photo, index) => (
+                            <PhotoCard
+                                key={`${activeTab}-${index}`}
+                                photo={photo}
+                                index={index}
+                                onClick={() => openLightbox(index)}
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* Lightbox Viewer */}
             {selectedIndex !== null && (
