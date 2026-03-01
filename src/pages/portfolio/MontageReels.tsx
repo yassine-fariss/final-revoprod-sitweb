@@ -110,10 +110,7 @@ function ReelCard({ reel, index }: { reel: typeof reels[0]; index: number }) {
                             <Play className="w-6 h-6 text-[#C6A75E] ml-1" />
                         </div>
 
-                        <div className="absolute bottom-5 left-5 right-5 text-left z-10">
-                            <h3 className="text-white font-semibold text-sm md:text-base leading-tight drop-shadow-lg truncate">{reel.title}</h3>
-                            <p className="text-[#C6A75E] text-[10px] mt-0.5 uppercase tracking-widest">{reel.category}</p>
-                        </div>
+                        {/* Title & category removed for cleaner look */}
                     </div>
                 )}
 
