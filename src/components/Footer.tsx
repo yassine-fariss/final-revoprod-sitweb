@@ -50,7 +50,12 @@ const Footer = () => {
                             <li>Revoproductionsteam@gmail.com</li>
                         </ul>
                         <div className="flex space-x-4 mt-6">
-                            <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-gold transition-colors">
+                            <a
+                                href="https://www.instagram.com/revo__productions?igsh=ZDRvbml4c2M4ajZv"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-gold transition-colors"
+                            >
                                 <Instagram className="w-4 h-4" />
                             </a>
                             <a href="#" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-brand-gold transition-colors">
