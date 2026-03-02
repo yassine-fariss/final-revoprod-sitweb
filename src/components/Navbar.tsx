@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, ChevronDown, Video, Camera, Scissors, MonitorSmartphone } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, Video, Camera, Scissors } from 'lucide-react';
 import logoUrl from '../assets/logo.png';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
@@ -22,7 +22,6 @@ const Navbar = () => {
         { label: t('services.videography.title'), to: '/portfolio/videography', icon: <Video className="w-4 h-4" /> },
         { label: t('services.photography.title'), to: '/portfolio/photography', icon: <Camera className="w-4 h-4" /> },
         { label: t('services.montage.title'), to: '/portfolio/montage-reels', icon: <Scissors className="w-4 h-4" /> },
-        { label: t('services.webdesign.title'), to: '/portfolio/web-design', icon: <MonitorSmartphone className="w-4 h-4" /> },
     ];
 
     useEffect(() => {
@@ -68,7 +67,7 @@ const Navbar = () => {
                     <img
                         src={logoUrl}
                         alt="Revo Production"
-                        className={`h-8 md:h-14 w-auto object-contain transition-all duration-700 ${theme === 'light' ? 'invert brightness-0' : ''} group-hover:scale-105`}
+                        className={`h-9 md:h-16 w-auto object-contain transition-all duration-700 ${theme === 'light' ? 'invert brightness-0' : ''} group-hover:scale-105`}
                     />
                 </Link>
 

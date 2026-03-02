@@ -13,7 +13,7 @@ const Footer = () => {
                     {/* Brand */}
                     <div className="md:col-span-1">
                         <Link to="/" className="block mb-4">
-                            <img src={logoUrl} alt="Revo Production" className="h-14 md:h-20 w-auto mix-blend-screen object-contain -ml-4" />
+                            <img src={logoUrl} alt="Revo Production" className="h-16 md:h-24 w-auto mix-blend-screen object-contain -ml-4" />
                         </Link>
                         <p className="text-white/60 text-sm leading-relaxed">
                             Production Vidéo & Création Digitale de haute qualité à Casablanca.
@@ -38,7 +38,6 @@ const Footer = () => {
                             <li><Link to="/portfolio/videography" className="text-white/60 hover:text-brand-gold text-sm transition-colors">Vidéographie</Link></li>
                             <li><Link to="/portfolio/photography" className="text-white/60 hover:text-brand-gold text-sm transition-colors">Photographie</Link></li>
                             <li><Link to="/portfolio/montage-reels" className="text-white/60 hover:text-brand-gold text-sm transition-colors">Montage & Reels</Link></li>
-                            <li><Link to="/portfolio/web-design" className="text-white/60 hover:text-brand-gold text-sm transition-colors">Web Design</Link></li>
                         </ul>
                     </div>
 

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
-import { Video, Camera, Scissors, MonitorSmartphone } from 'lucide-react';
+import { Video, Camera, Scissors } from 'lucide-react';
 
 export default function Services() {
     const { t } = useTranslation();
@@ -26,13 +26,6 @@ export default function Services() {
             desc: t('services.montage.desc'),
             icon: <Scissors className="w-8 h-8 text-brand-gold" />,
             image: '/service_montage.png',
-        },
-        {
-            id: 'web-design',
-            title: t('services.webdesign.title'),
-            desc: t('services.webdesign.desc'),
-            icon: <MonitorSmartphone className="w-8 h-8 text-brand-gold" />,
-            image: '/service_webdesign.png',
         }
     ];
 

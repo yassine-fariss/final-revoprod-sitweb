@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Video, Camera, Scissors, MonitorSmartphone, ArrowRight, CheckCircle, Play } from 'lucide-react';
+import { Video, Camera, Scissors, ArrowRight, CheckCircle, Play } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
@@ -119,7 +119,7 @@ export default function Home() {
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[10s] ease-out scale-110 animate-slow-zoom"
                     style={{
-                        backgroundImage: "url('/hero_background.png')",
+                        backgroundImage: "url('/videographer_hero.png')",
                     }}
                 />
 
@@ -129,9 +129,11 @@ export default function Home() {
                 <div className="container relative z-10 mx-auto px-6 text-center">
                     <AnimatedSection delay={0.2}>
                         <div className="inline-block w-full">
-                            <h1 className="text-3xl md:text-6xl lg:text-8xl font-black text-white tracking-widest leading-tight md:leading-none mb-6 uppercase break-words px-4">
-                                {t('hero.title1')} <br className="hidden sm:block" />
-                                <span className="text-brand-gold luxury-text-glow italic font-serif block sm:inline mt-2 sm:mt-0">
+                            <h1 className="flex flex-col items-center gap-4 mb-8">
+                                <span className="font-brand text-4xl md:text-6xl lg:text-8xl font-bold text-brand-gold luxury-text-glow luxury-text-glow-white uppercase tracking-[0.2em]">
+                                    {t('hero.title1')}
+                                </span>
+                                <span className="font-luxury text-xl md:text-3xl lg:text-4xl text-white italic font-medium tracking-premium mt-2">
                                     {t('hero.title2')}
                                 </span>
                             </h1>
@@ -154,7 +156,7 @@ export default function Home() {
                                 </Button>
                             </Link>
                             <Link to="/contact">
-                                <Button variant="outline" className="px-10 py-6 tracking-widest uppercase text-xs border-white/20 hover:border-brand-gold">
+                                <Button variant="outline" className="px-10 py-6 tracking-widest uppercase text-xs border-white/20 hover:border-brand-gold shadow-[0_10px_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_15px_50px_-5px_rgba(255,255,255,0.4)]">
                                     {t('hero.btn_contact')}
                                 </Button>
                             </Link>
@@ -176,7 +178,7 @@ export default function Home() {
                         </div>
                     </AnimatedSection>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <ServiceCard
                             title={t('services.videography.title')}
                             description={t('services.videography.desc')}
@@ -200,14 +202,6 @@ export default function Home() {
                             linkTo="/portfolio/montage-reels"
                             image="/service_montage.png"
                             delay={0.3}
-                        />
-                        <ServiceCard
-                            title={t('services.webdesign.title')}
-                            description={t('services.webdesign.desc')}
-                            icon={<MonitorSmartphone className="w-10 h-10" />}
-                            linkTo="/portfolio/web-design"
-                            image="/service_webdesign.png"
-                            delay={0.4}
                         />
                     </div>
                 </div>
@@ -239,6 +233,73 @@ export default function Home() {
                             <span>{t('portfolio.view_all')}</span>
                         </Link>
                     </div>
+                </div>
+            </section>
+
+            {/* Production Cinema Section */}
+            <section className="py-24 bg-black relative overflow-hidden">
+                <div className="container mx-auto px-6">
+                    <AnimatedSection>
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 uppercase tracking-widest">{t('production_cinema.title')}</h2>
+                            <div className="w-24 h-1 bg-brand-gold mx-auto mb-6" />
+                            <p className="text-white/60 max-w-2xl mx-auto italic">
+                                {t('production_cinema.subtitle')}
+                            </p>
+                        </div>
+                    </AnimatedSection>
+
+                    <AnimatedSection delay={0.2}>
+                        <div className="relative aspect-video max-w-5xl mx-auto group">
+                            {/* Gold frame decoration */}
+                            <div className="absolute -inset-4 border border-brand-gold/20 z-0 pointer-events-none" />
+
+                            <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                                <video
+                                    src="/production cinema/Tieser PFE RAFIK.mp4"
+                                    className="w-full h-full object-cover"
+                                    controls
+                                    poster="/videographer_hero.png"
+                                />
+
+                                {/* Overlay glow on hover */}
+                                <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                            </div>
+
+                            {/* Cinematic accent lines */}
+                            <div className="absolute -bottom-2 -right-2 w-24 h-24 border-b-2 border-r-2 border-brand-gold/30 pointer-events-none" />
+                            <div className="absolute -top-2 -left-2 w-24 h-24 border-t-2 border-l-2 border-brand-gold/30 pointer-events-none" />
+                        </div>
+                    </AnimatedSection>
+                </div>
+            </section>
+
+            {/* Clients Section */}
+            <section className="py-24 bg-[#050505]">
+                <div className="container mx-auto px-6">
+                    <AnimatedSection>
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{t('clients.title')}</h2>
+                            <div className="w-24 h-1 bg-brand-gold mx-auto" />
+                        </div>
+                    </AnimatedSection>
+
+                    <AnimatedSection delay={0.2}>
+                        <div className="bg-white rounded-3xl p-8 md:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 items-center justify-items-center">
+                                <img src="/clients/ICESCO-image.png" alt="ICESCO" className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/Marriott-Hotels-&amp-Resorts.webp" alt="Marriott" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/mawazine.png" alt="Mawazine" className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/skoda-logo-png_seeklogo-177065.png" alt="Skoda" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/client1.jpg" alt="Client 1" className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/client2.png" alt="Client 2" className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/images.png" alt="Client 3" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/images (1).png" alt="Client 4" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/images (2).png" alt="Client 5" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                                <img src="/clients/images.jpg" alt="Client 6" className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-500" />
+                            </div>
+                        </div>
+                    </AnimatedSection>
                 </div>
             </section>
 

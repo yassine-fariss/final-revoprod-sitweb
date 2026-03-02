@@ -28,6 +28,12 @@ const reels = [
         category: 'Social Media',
         seekTime: 1,
     },
+    {
+        src: '/reels/WhatsApp Video 2026-03-01 at 21.38.55.mp4',
+        title: 'Reel Impact 5',
+        category: 'Modern Production',
+        seekTime: 1,
+    },
 ];
 
 function useVideoThumbnail(src: string, seekTime: number) {

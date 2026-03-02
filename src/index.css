@@ -1,5 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tailwindcss/utilities";
+
+.font-brand {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-luxury {
+  font-family: 'Playfair Display', serif;
+}
 
 :root {
   --bg-primary: #fcfcfc;
@@ -37,6 +46,15 @@ body {
   letter-spacing: -0.01em;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+}
+
 /* Luxury Typography Utilities */
 .tracking-cinematic {
   letter-spacing: 0.15em;
@@ -60,6 +78,10 @@ body {
 
 .luxury-text-glow {
   text-shadow: 0 0 20px rgba(198, 167, 94, 0.3);
+}
+
+.luxury-text-glow-white {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
 .luxury-shadow-sm {
