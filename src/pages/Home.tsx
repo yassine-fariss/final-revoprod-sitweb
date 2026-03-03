@@ -259,7 +259,7 @@ export default function Home() {
                                     src="/production cinema/Tieser PFE RAFIK.mp4"
                                     className="w-full h-full object-cover"
                                     controls
-                                    poster="/videographer_hero.png"
+                                    poster="/new photos/DSC_1280-Edit.jpg"
                                 />
 
                                 {/* Overlay glow on hover */}
