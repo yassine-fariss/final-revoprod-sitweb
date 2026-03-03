@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Video, Camera, Scissors, ArrowRight, CheckCircle, Play } from 'lucide-react';
+import { Video, Camera, Scissors, ArrowRight, CheckCircle, Play, Clapperboard } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/Button';
@@ -250,9 +250,9 @@ export default function Home() {
                         <ServiceCard
                             title={t('video_cinema.title')}
                             description={t('video_cinema.subtitle')}
-                            icon={<Play className="w-10 h-10" />}
+                            icon={<Clapperboard className="w-10 h-10" />}
                             linkTo="/portfolio/video-cinema"
-                            image="/new photos/DSC_1280-Edit.jpg"
+                            image="/videographer_hero.png"
                             delay={0.4}
                         />
                     </div>
