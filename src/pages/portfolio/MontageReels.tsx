@@ -34,6 +34,12 @@ const reels = [
         category: 'Modern Production',
         seekTime: 1,
     },
+    {
+        src: '/reels/Whatsapp Video 2026-03-03 At 06.10.07.mp4',
+        title: 'Reel Impact 6',
+        category: 'Cinematic Montage',
+        seekTime: 2,
+    },
 ];
 
 function useVideoThumbnail(src: string, seekTime: number) {
