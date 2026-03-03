@@ -106,6 +106,50 @@ function HomeVideoCard({ video, index }: { video: any; index: number }) {
     );
 }
 
+const ProductionCinemaSection = ({ t }: { t: any }) => {
+    const videoSrc = "/production cinema/Tieser PFE RAFIK.mp4";
+    const thumbnail = useVideoThumbnail(videoSrc, 3);
+
+    return (
+        <section className="py-24 bg-black relative overflow-hidden">
+            <div className="container mx-auto px-6">
+                <AnimatedSection>
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 uppercase tracking-widest">{t('production_cinema.title')}</h2>
+                        <div className="w-24 h-1 bg-brand-gold mx-auto mb-6" />
+                        <p className="text-white/60 max-w-2xl mx-auto italic">
+                            {t('production_cinema.subtitle')}
+                        </p>
+                    </div>
+                </AnimatedSection>
+
+                <AnimatedSection delay={0.2}>
+                    <div className="relative aspect-video max-w-5xl mx-auto group">
+                        {/* Gold frame decoration */}
+                        <div className="absolute -inset-4 border border-brand-gold/20 z-0 pointer-events-none" />
+
+                        <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                            <video
+                                src={videoSrc}
+                                className="w-full h-full object-cover"
+                                controls
+                                poster={thumbnail ?? undefined}
+                            />
+
+                            {/* Overlay glow on hover */}
+                            <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                        </div>
+
+                        {/* Cinematic accent lines */}
+                        <div className="absolute -bottom-2 -right-2 w-24 h-24 border-b-2 border-r-2 border-brand-gold/30 pointer-events-none" />
+                        <div className="absolute -top-2 -left-2 w-24 h-24 border-t-2 border-l-2 border-brand-gold/30 pointer-events-none" />
+                    </div>
+                </AnimatedSection>
+            </div>
+        </section>
+    );
+};
+
 export default function Home() {
     const { t } = useTranslation();
     const videos = homeVideos(t);
@@ -237,44 +281,7 @@ export default function Home() {
             </section>
 
             {/* Production Cinema Section */}
-            <section className="py-24 bg-black relative overflow-hidden">
-                <div className="container mx-auto px-6">
-                    <AnimatedSection>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 uppercase tracking-widest">{t('production_cinema.title')}</h2>
-                            <div className="w-24 h-1 bg-brand-gold mx-auto mb-6" />
-                            <p className="text-white/60 max-w-2xl mx-auto italic">
-                                {t('production_cinema.subtitle')}
-                            </p>
-                        </div>
-                    </AnimatedSection>
-
-                    <AnimatedSection delay={0.2}>
-                        <div className="relative aspect-video max-w-5xl mx-auto group">
-                            {/* Gold frame decoration */}
-                            <div className="absolute -inset-4 border border-brand-gold/20 z-0 pointer-events-none" />
-
-                            <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                                <video
-                                    src="/production cinema/Tieser PFE RAFIK.mp4"
-                                    className="w-full h-full object-cover"
-                                    controls
-                                    poster="/new photos/DSC_1280-Edit.jpg"
-                                />
-
-                                {/* Overlay glow on hover */}
-                                <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                            </div>
-
-                            {/* Cinematic accent lines */}
-                            <div className="absolute -bottom-2 -right-2 w-24 h-24 border-b-2 border-r-2 border-brand-gold/30 pointer-events-none" />
-                            <div className="absolute -top-2 -left-2 w-24 h-24 border-t-2 border-l-2 border-brand-gold/30 pointer-events-none" />
-                        </div>
-                    </AnimatedSection>
-                </div>
-            </section>
-
-
+            <ProductionCinemaSection t={t} />
 
             {/* Clients Section */}
             <section className="py-24 bg-[#050505]">

@@ -1,39 +1,146 @@
+import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../../components/AnimatedSection';
-import { Video } from 'lucide-react';
+import { Play, Clapperboard } from 'lucide-react';
 
-const VideoPlaceholder = ({ index }: { index: number }) => {
+const videoCinemaWorks = (t: any) => [
+    {
+        src: '/production cinema/La Main Gauche Trailer - Mohcine Rafik Copie 1.mp4',
+        title: 'La Main Gauche Trailer',
+        category: t('category.cinema'),
+        seekTime: 5,
+    },
+    {
+        src: '/production cinema/Whatsapp Video 2026-03-03 At 06.10.07 (1).mp4',
+        title: 'Cinematic Production',
+        category: t('category.cinema'),
+        seekTime: 3,
+    },
+];
+
+/** Extracts a single frame from a video URL at `seekTime` seconds using canvas. */
+function useVideoThumbnail(src: string, seekTime: number) {
+    const [thumbnail, setThumbnail] = useState<string | null>(null);
+
+    useEffect(() => {
+        const vid = document.createElement('video');
+        vid.crossOrigin = 'anonymous';
+        vid.preload = 'metadata';
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.src = src;
+
+        const capture = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = vid.videoWidth;
+            canvas.height = vid.videoHeight;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+                setThumbnail(canvas.toDataURL('image/jpeg', 0.8));
+            }
+            vid.src = '';
+        };
+
+        vid.addEventListener('seeked', capture, { once: true });
+
+        vid.addEventListener('loadedmetadata', () => {
+            const t = Math.min(seekTime, vid.duration - 0.1);
+            vid.currentTime = t > 0 ? t : 0;
+        }, { once: true });
+
+        return () => {
+            vid.src = '';
+        };
+    }, [src, seekTime]);
+
+    return thumbnail;
+}
+
+function VideoCard({ video, index }: { video: any; index: number }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [playing, setPlaying] = useState(false);
+    const thumbnail = useVideoThumbnail(video.src, video.seekTime);
+
+    const handlePlay = () => {
+        if (videoRef.current) {
+            videoRef.current.play();
+            setPlaying(true);
+        }
+    };
+
+    const handlePause = () => setPlaying(false);
+
     return (
         <AnimatedSection delay={index * 0.15}>
-            <div className="group relative aspect-video overflow-hidden border border-white/5 bg-neutral-900/50 backdrop-blur-sm rounded-xl transition-all duration-700 hover:border-brand-gold/40 luxury-shadow-sm">
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-brand-gold/30 flex flex-col items-center gap-4">
-                        <Video className="w-12 h-12 transition-transform duration-700 group-hover:scale-110 group-hover:text-brand-gold/50" />
-                        <span className="text-[10px] uppercase tracking-widest font-medium">Video Cinema {index + 1}</span>
+            <div
+                className="group relative overflow-hidden bg-background border border-border-subtle transition-all duration-700 hover:border-brand-gold/40 luxury-shadow-sm rounded-xl"
+                style={{ aspectRatio: '16 / 9' }}
+            >
+                {/* Native HTML5 Video */}
+                <video
+                    ref={videoRef}
+                    src={video.src}
+                    poster={thumbnail ?? undefined}
+                    preload="none"
+                    controls={playing}
+                    onPause={handlePause}
+                    onEnded={handlePause}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+
+                {/* Play overlay */}
+                {!playing && (
+                    <div
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center cursor-pointer bg-black/60 transition-all duration-500 group-hover:bg-black/40"
+                        onClick={handlePlay}
+                    >
+                        {/* Thumbnail bg fallback if poster not yet ready */}
+                        {!thumbnail && (
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-black/60" />
+                        )}
+
+                        {/* Luxury play button */}
+                        <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full border border-brand-gold bg-black/30 backdrop-blur-md flex items-center justify-center mb-4 md:mb-6 transform transition-all duration-500 group-hover:scale-105 group-hover:bg-brand-gold/10 group-hover:shadow-[0_0_20px_rgba(198,167,94,0.3)]">
+                            <Play className="w-6 h-6 md:w-8 md:h-8 text-brand-gold ml-1 fill-brand-gold/20" />
+                        </div>
+
+                        {/* Title & category */}
+                        <div className="text-center z-10 p-4 md:p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <h3 className="text-white font-bold text-lg md:text-2xl leading-tight mb-2 tracking-wide uppercase drop-shadow-2xl">{video.title}</h3>
+                            <div className="w-8 h-[1px] bg-brand-gold mx-auto mb-2 transition-all duration-500 group-hover:w-16" />
+                            <p className="text-white/40 text-[10px] md:text-xs uppercase tracking-[0.3em] font-medium">{video.category}</p>
+                        </div>
                     </div>
-                </div>
+                )}
 
-                {/* Overlay glow on hover */}
-                <div className="absolute inset-0 bg-brand-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                {/* Cinematic corner accents */}
-                <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-brand-gold/20 transition-all duration-700 group-hover:w-16 group-hover:h-16 group-hover:border-brand-gold/40" />
-                <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-brand-gold/20 transition-all duration-700 group-hover:w-16 group-hover:h-16 group-hover:border-brand-gold/40" />
-
-                {/* Content Overlay that appears on hover */}
-                <div className="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div>
-                        <h3 className="text-white font-bold text-xl mb-1 tracking-wide uppercase">Projet Cinématographique {index + 1}</h3>
-                        <p className="text-brand-gold/60 text-[10px] uppercase tracking-[0.2em]">En attente de contenu</p>
-                    </div>
-                </div>
+                {/* Accent line */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20" />
             </div>
         </AnimatedSection>
     );
-};
+}
+
+const PlaceholderCard = ({ index }: { index: number }) => (
+    <AnimatedSection delay={index * 0.15}>
+        <div className="group relative aspect-video overflow-hidden border border-white/5 bg-neutral-900/50 backdrop-blur-sm rounded-xl transition-all duration-700 hover:border-brand-gold/20 grayscale hover:grayscale-0">
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-brand-gold/10 flex flex-col items-center gap-4 group-hover:text-brand-gold/20 transition-colors duration-700">
+                    <Clapperboard className="w-12 h-12" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-medium italic">Upcoming Film</span>
+                </div>
+            </div>
+
+            {/* Cinematic corner accents */}
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-brand-gold/5 transition-all duration-700 group-hover:border-brand-gold/20" />
+            <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-brand-gold/5 transition-all duration-700 group-hover:border-brand-gold/20" />
+        </div>
+    </AnimatedSection>
+);
 
 export default function VideoCinema() {
     const { t } = useTranslation();
+    const works = videoCinemaWorks(t);
 
     return (
         <div className="min-h-screen bg-background pt-12 pb-24 transition-colors duration-500">
@@ -52,11 +159,14 @@ export default function VideoCinema() {
                 </AnimatedSection>
             </section>
 
-            {/* Video Grid Placeholder */}
+            {/* Video Grid */}
             <section className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {[0, 1, 2, 3, 4, 5].map((index) => (
-                        <VideoPlaceholder key={index} index={index} />
+                    {works.map((video, index) => (
+                        <VideoCard key={video.src} video={video} index={index} />
+                    ))}
+                    {[0, 1, 2, 3].map((i) => (
+                        <PlaceholderCard key={`placeholder-${i}`} index={i + works.length} />
                     ))}
                 </div>
             </section>
