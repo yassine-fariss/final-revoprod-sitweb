@@ -222,7 +222,7 @@ export default function Home() {
                         </div>
                     </AnimatedSection>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <ServiceCard
                             title={t('services.videography.title')}
                             description={t('services.videography.desc')}
@@ -246,6 +246,14 @@ export default function Home() {
                             linkTo="/portfolio/montage-reels"
                             image="/service_montage.png"
                             delay={0.3}
+                        />
+                        <ServiceCard
+                            title={t('video_cinema.title')}
+                            description={t('video_cinema.subtitle')}
+                            icon={<Play className="w-10 h-10" />}
+                            linkTo="/portfolio/video-cinema"
+                            image="/new photos/DSC_1280-Edit.jpg"
+                            delay={0.4}
                         />
                     </div>
                 </div>
