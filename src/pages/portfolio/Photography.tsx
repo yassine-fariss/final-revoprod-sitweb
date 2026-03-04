@@ -62,14 +62,14 @@ const portraitPhotos = [
     '/Photo/portrait photos/ghaziphotoghraphiesalé.jpg',
 ];
 
-const kaftanPhotos = [
-    '/kaftan/DSC02910_result.jpg.jpeg',
-    '/kaftan/DSC02919_result.jpg.jpeg',
-    '/kaftan/DSC02927_result.jpg.jpeg',
-    '/kaftan/DSC02935_result.jpg.jpeg',
-    '/kaftan/DSC02992_result.jpg.jpeg',
-    '/kaftan/DSC03036_result.jpg.jpeg',
-    '/kaftan/DSC03055_result.jpg.jpeg',
+const caftanPhotos = [
+    '/caftan/DSC02910_result.jpg.jpeg',
+    '/caftan/DSC02919_result.jpg.jpeg',
+    '/caftan/DSC02927_result.jpg.jpeg',
+    '/caftan/DSC02935_result.jpg.jpeg',
+    '/caftan/DSC02992_result.jpg.jpeg',
+    '/caftan/DSC03036_result.jpg.jpeg',
+    '/caftan/DSC03055_result.jpg.jpeg',
 ];
 
 function PhotoCard({ photo, index, onClick }: { photo: string, index: number, onClick: () => void }) {
@@ -113,13 +113,13 @@ function PhotoCard({ photo, index, onClick }: { photo: string, index: number, on
 export default function Photography() {
     const { t } = useTranslation();
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial' | 'portrait' | 'kaftan' | null>(null);
+    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial' | 'portrait' | 'caftan' | null>(null);
 
     const getPhotos = () => {
         if (activeTab === 'wedding') return weddingPhotos;
         if (activeTab === 'commercial') return commercialPhotos;
         if (activeTab === 'portrait') return portraitPhotos;
-        if (activeTab === 'kaftan') return kaftanPhotos;
+        if (activeTab === 'caftan') return caftanPhotos;
         return [];
     };
 
@@ -142,7 +142,7 @@ export default function Photography() {
         if (activeTab === 'wedding') return t('photography.collection.wedding');
         if (activeTab === 'commercial') return t('photography.collection.commercial');
         if (activeTab === 'portrait') return t('photography.collection.portrait');
-        if (activeTab === 'kaftan') return t('photography.collection.kaftan');
+        if (activeTab === 'caftan') return t('photography.collection.caftan');
         return t('photography.page_title');
     };
 
@@ -242,20 +242,20 @@ export default function Photography() {
                             </div>
                         </AnimatedSection>
 
-                        {/* Kaftan Collection Card */}
+                        {/* Caftan Collection Card */}
                         <AnimatedSection delay={0.4}>
                             <div
-                                onClick={() => { setActiveTab('kaftan'); setSelectedIndex(null); }}
+                                onClick={() => { setActiveTab('caftan'); setSelectedIndex(null); }}
                                 className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm"
                             >
                                 <img
-                                    src={kaftanPhotos[0]}
-                                    alt="Kaftan Collection Preview"
+                                    src={caftanPhotos[0]}
+                                    alt="Caftan Collection Preview"
                                     className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700" />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-cinematic uppercase luxury-text-glow">Kaftan</h2>
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-cinematic uppercase luxury-text-glow">Caftan</h2>
                                     <div className="w-8 h-[1px] bg-brand-gold transition-all duration-700 group-hover:w-20" />
                                     <p className="mt-6 text-white/50 text-xs uppercase tracking-[0.3em] font-medium opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0">{t('photography.explore')}</p>
                                 </div>
