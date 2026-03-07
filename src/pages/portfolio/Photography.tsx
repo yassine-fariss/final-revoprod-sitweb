@@ -315,13 +315,19 @@ export default function Photography() {
                                 onClick={() => { setActiveTab('school'); setSelectedIndex(null); }}
                                 className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm"
                             >
+                                {/* Ambient Blurred Background to fill margins */}
+                                <img
+                                    src={schoolPhotos[6]}
+                                    alt=""
+                                    className="absolute inset-0 w-full h-full object-cover blur-[30px] opacity-70 scale-125 transition-transform duration-1000 group-hover:scale-150"
+                                />
                                 <img
                                     src={schoolPhotos[6]}
                                     alt="School Collection Preview"
-                                    className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-1000 group-hover:scale-110"
+                                    className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-1000 group-hover:scale-105 z-10"
                                 />
-                                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700" />
-                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700 z-20" />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-30">
                                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-cinematic uppercase luxury-text-glow">School</h2>
                                     <div className="w-8 h-[1px] bg-brand-gold transition-all duration-700 group-hover:w-20" />
                                     <p className="mt-6 text-white/50 text-xs uppercase tracking-[0.3em] font-medium opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0">{t('photography.explore')}</p>
