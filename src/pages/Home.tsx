@@ -28,7 +28,7 @@ const teamData = (t: any) => [
     {
         name: 'Othmane',
         role: t('role.editor'),
-        image: null,
+        image: '/teams/othamne.jpeg',
         instagram: 'https://www.instagram.com/oth_2.1?igsh=bGhsaXg3OGxoamZu',
     },
     {
