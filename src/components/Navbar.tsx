@@ -67,7 +67,7 @@ const Navbar = () => {
                 <Link to="/" className="flex items-center group">
                     <img
                         src={logoUrl}
-                        alt="Revo Production"
+                        alt="Revo Productions"
                         className={`h-9 md:h-16 w-auto object-contain transition-all duration-700 ${theme === 'light' ? 'invert brightness-0' : ''} group-hover:scale-105`}
                     />
                 </Link>

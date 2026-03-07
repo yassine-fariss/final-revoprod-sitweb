@@ -13,7 +13,7 @@ const Footer = () => {
                     {/* Brand */}
                     <div className="md:col-span-1">
                         <Link to="/" className="block mb-4">
-                            <img src={logoUrl} alt="Revo Production" className="h-16 md:h-24 w-auto mix-blend-screen object-contain -ml-4" />
+                            <img src={logoUrl} alt="Revo Productions" className="h-16 md:h-24 w-auto mix-blend-screen object-contain -ml-4" />
                         </Link>
                         <p className="text-white/60 text-sm leading-relaxed">
                             Production Vidéo & Création Digitale de haute qualité à Casablanca.
@@ -70,7 +70,7 @@ const Footer = () => {
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-white/40 text-xs text-center md:text-left">
-                        &copy; {new Date().getFullYear()} Revo Production. Tous droits réservés.
+                        &copy; {new Date().getFullYear()} Revo Productions. Tous droits réservés.
                     </p>
                     <div className="mt-4 md:mt-0 space-x-4">
                         <Link to="#" className="text-white/40 hover:text-white text-xs transition-colors">Mentions Légales</Link>
