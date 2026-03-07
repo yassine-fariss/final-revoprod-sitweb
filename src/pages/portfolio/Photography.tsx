@@ -316,7 +316,7 @@ export default function Photography() {
                                 className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm"
                             >
                                 <img
-                                    src={schoolPhotos[0]}
+                                    src={schoolPhotos[6]}
                                     alt="School Collection Preview"
                                     className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
                                 />
