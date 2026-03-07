@@ -79,6 +79,23 @@ const jewelryPhotos = [
     '/jewelry/4991640a-24ab-4f68-bae8-76b162c5fc5e.jpg',
 ];
 
+const schoolPhotos = [
+    '/school/DSC_4880.jpg.jpeg',
+    '/school/DSC_4934.jpg.jpeg',
+    '/school/DSC_4985.jpg.jpeg',
+    '/school/DSC_5018.jpg.jpeg',
+    '/school/DSC_5104.jpg.jpeg',
+    '/school/DSC_5130.jpg.jpeg',
+    '/school/DSC_5427.jpg.jpeg',
+    '/school/Img761.jpg.jpeg',
+    '/school/Img772.jpg.jpeg',
+    '/school/Img774.jpg.jpeg',
+    '/school/Img778.jpg.jpeg',
+    '/school/Img835.jpg.jpeg',
+    '/school/Img867.jpg.jpeg',
+    '/school/Img875.jpg.jpeg',
+];
+
 function PhotoCard({ photo, index, onClick }: { photo: string, index: number, onClick: () => void }) {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -120,7 +137,7 @@ function PhotoCard({ photo, index, onClick }: { photo: string, index: number, on
 export default function Photography() {
     const { t } = useTranslation();
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial' | 'portrait' | 'caftan' | 'jewelry' | null>(null);
+    const [activeTab, setActiveTab] = useState<'wedding' | 'commercial' | 'portrait' | 'caftan' | 'jewelry' | 'school' | null>(null);
 
     const getPhotos = () => {
         if (activeTab === 'wedding') return weddingPhotos;
@@ -152,6 +169,7 @@ export default function Photography() {
         if (activeTab === 'portrait') return t('photography.collection.portrait');
         if (activeTab === 'caftan') return t('photography.collection.caftan');
         if (activeTab === 'jewelry') return t('photography.collection.jewelry');
+        if (activeTab === 'school') return t('photography.collection.school');
         return t('photography.page_title');
     };
 
@@ -275,7 +293,7 @@ export default function Photography() {
                         <AnimatedSection delay={0.5}>
                             <div
                                 onClick={() => { setActiveTab('jewelry'); setSelectedIndex(null); }}
-                                className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm md:col-span-2 lg:col-span-1"
+                                className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm"
                             >
                                 <img
                                     src={jewelryPhotos[2]}
@@ -285,6 +303,26 @@ export default function Photography() {
                                 <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700" />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
                                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-cinematic uppercase luxury-text-glow">Jewelry</h2>
+                                    <div className="w-8 h-[1px] bg-brand-gold transition-all duration-700 group-hover:w-20" />
+                                    <p className="mt-6 text-white/50 text-xs uppercase tracking-[0.3em] font-medium opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0">{t('photography.explore')}</p>
+                                </div>
+                            </div>
+                        </AnimatedSection>
+
+                        {/* School Collection Card */}
+                        <AnimatedSection delay={0.6}>
+                            <div
+                                onClick={() => { setActiveTab('school'); setSelectedIndex(null); }}
+                                className="group relative aspect-[4/5] cursor-pointer overflow-hidden border border-border-subtle hover:border-brand-gold/40 transition-all duration-1000 rounded-2xl bg-background luxury-shadow-sm"
+                            >
+                                <img
+                                    src={schoolPhotos[0]}
+                                    alt="School Collection Preview"
+                                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700" />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-cinematic uppercase luxury-text-glow">School</h2>
                                     <div className="w-8 h-[1px] bg-brand-gold transition-all duration-700 group-hover:w-20" />
                                     <p className="mt-6 text-white/50 text-xs uppercase tracking-[0.3em] font-medium opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0">{t('photography.explore')}</p>
                                 </div>
